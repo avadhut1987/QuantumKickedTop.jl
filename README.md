@@ -37,12 +37,15 @@ where
 The **Double Kicked Top (DKT)** extends this model by applying **two kicks within each driving period**.
 
 The classical dynamics are obtained by evaluating:
+
 $$
-\vec{J}_{n+1} = U^\dagger\,\vec{J}_n U,
+\vec{J}_{n+1} = U^\dagger \hspace{0.1cm} \vec{J}_n U,
 $$
+
 with $\vec{X}=\frac{\vec{J}}{j}$ and then taking limit $j\to\infty$. Here, the dynamically relevant parameters are given by
+
 $$
-k_r = \frac{k+k'}{2}, \; k_\theta = \frac{k-k'}{2}.
+k_r = \frac{k+k'}{2}, \hspace{0.1cm} k_\theta = \frac{k-k'}{2}.
 $$
 
 The parameter $k_r$ in the DKT exhibits a transition from **regular dynamics to strong chaos**, and related to the standard kicked top kicking strength $k = 2k_r$. The other parameter twists the phase space structures without disturbing chaos. This makes the DKT as an ideal models for studying **quantum chaos, entanglement generation and broken time-reversal symmetry**.
@@ -69,7 +72,7 @@ The package provides tools to compute and analyze:
 ### Von Neumann Entropy
 
 $$
-S = -\mathrm{Tr}(\rho \log \rho)
+S = -\mathrm{Tr}(\rho \hspace{0.1cm} \log \hspace{0.1cm} \rho)
 $$
 
 ### Linear Entropy
