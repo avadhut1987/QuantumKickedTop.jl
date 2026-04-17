@@ -55,6 +55,25 @@ The parameter $k_r$ in the DKT exhibits a transition from **regular dynamics to 
 
 ---
 
+# Installation
+
+Clone the repository and activate the Julia environment.
+
+```julia
+using Pkg
+Pkg.activate(".")
+Pkg.instantiate()
+```
+
+Alternatively install directly from GitHub
+
+```
+using Pkg
+Pkg.add(url="https://github.com/avadhut1987/QuantumKickedTop.jl")
+```
+
+---
+
 # Features
 
 The package provides tools to compute and analyze:
@@ -108,23 +127,6 @@ The package can generate
 Detailed module documentation is available in the `docs/` directory.
 
 ---
-
-# Installation
-
-Clone the repository and activate the Julia environment.
-
-```julia
-using Pkg
-Pkg.activate(".")
-Pkg.instantiate()
-```
-
-Alternatively install directly from GitHub
-
-```
-using Pkg
-Pkg.add(url="https://github.com/avadhut1987/QuantumKickedTop.jl")
-```
 
 # Project Structure
 ```QuantumKickedTop.jl
