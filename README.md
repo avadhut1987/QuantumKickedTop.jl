@@ -2,7 +2,7 @@
 
 Julia tools for studying **quantum chaos and entanglement in the Quantum Kicked Top (QKT)** and its generalization, the **Double Kicked Top (DKT)**.
 
-The Double Kicked Top extends the standard kicked top by introducing an additional periodic kick within each driving period. The present package implements tools for studying **both models**, with the standard QKT appearing as a **special case of the DKT dynamics**.
+The Double Kicked Top extends the standard kicked top by introducing an additional, immediate, periodic kick with the same driving period as that of the first kick. The present package implements tools for studying **both models**, with the standard QKT appearing as a **special case of the DKT dynamics**.
 
 This package provides implementations for
 
