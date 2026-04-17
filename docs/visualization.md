@@ -174,6 +174,11 @@ Examples include:
 - discord heatmaps  
 - Lyapunov exponent plots  
 
+![Entropy Example](../img/entropy_50.5_partition_1_kr_1.0_kt_1.0.png)
+![Entropy Example](../img/entropy_50.5_partition_1_kr_1.25_kt_1.25.png)
+![Entropy Example](../img/entropy_50.5_partition_1_kr_1.50_kt_1.50.png)
+![Entropy Example](../img/entropy_50.5_partition_1_kr_3.0_kt_3.0.png)
+
 ---
 
 ## 2. Data Files
