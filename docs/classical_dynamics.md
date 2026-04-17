@@ -24,7 +24,7 @@ The classical map for the kicked top consists of a **rotation followed by a nonl
 The update rule for the angular momentum vector is
 
 $$
-\vec{J}_{n+1} = R_y(p)\,T_z(k)\,\vec{J}_n
+\vec{J}_{n+1} = R_y(p) \hspace{0.1cm} T_z(k) \hspace{0.1cm} \vec{J}_n
 $$
 
 where
@@ -35,6 +35,7 @@ where
 - \(k\) is the kick strength
 
 Explicitly, the nonlinear torsion around $x$-axis corresponds to:
+
 $$
 X_1 = X
 $$
@@ -42,11 +43,13 @@ $$
 $$
 Y_1 = Y \cos(k' X) - Z \sin(k' X)
 $$
+
 $$
 Z_1 = Z \cos(k' X) + Y \sin(k' X).
 $$
 
 The nonlinear torsion around $z$-axis corresponds to:
+
 $$
 X_2 = X_1 \cos(k Z_1) - Y_1 \sin(k Z_1)
 $$
@@ -54,9 +57,11 @@ $$
 $$
 Y_2 = X_1 \sin(k Z_1) + Y_1 \cos(k Z_1)
 $$
+
 $$
 Z_2 = Z_1.
 $$
+
 This is followed by the rotation around $y$-axis $R_y(p)$ which mixes the components of the angular momentum vector.
 
 ---
@@ -71,7 +76,7 @@ The dynamics can exhibit
 - fully chaotic dynamics
 
 depending on the values of **kicking strengths**. 
-For small \(k\), the motion is predominantly regular, while for large \(k\), the system becomes strongly chaotic.
+For small $k$, the motion is predominantly regular, while for large $k$, the system becomes strongly chaotic.
 
 ---
 
