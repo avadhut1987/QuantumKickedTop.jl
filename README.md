@@ -100,6 +100,10 @@ The package can generate
 - Entanglement vs kick strength
 - Entropy scans for different spin values
 
+## Documentation
+
+Detailed module documentation is available in the `docs/` directory.
+
 ---
 
 # Installation
@@ -220,13 +224,10 @@ Contains generated figures such as entropy heatmaps.
 
 Example
 ```
-entropy_vs_kr_all_s.png
+
 entropy_50.5_partition_1_kr_1.0_kt_1.0.png
 ```
 ![Entropy Example](img/entropy_50.5_partition_1_kr_1.0_kt_1.0.png)
-![Entropy Example](img/entropy_50.5_partition_1_kr_1.25_kt_1.25.png)
-![Entropy Example](img/entropy_50.5_partition_1_kr_1.50_kt_1.50.png)
-![Entropy Example](img/entropy_50.5_partition_1_kr_3.0_kt_3.0.png)
 
 ### npy/
 Stores numerical datasets in ```.npz``` format.
@@ -234,8 +235,7 @@ Stores numerical datasets in ```.npz``` format.
 Example
 ```
 entropy_s1.5.npz
-entropy_s10.5.npz
-entropy_s50.5.npz
+
 ```
 These files can be reused for plotting and further analysis.
 
