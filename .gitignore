@@ -1,0 +1,41 @@
+# Julia
+*.jl.cov
+*.jl.*.cov
+*.jl.mem
+deps/
+build/
+docs/build/
+
+# Compiled/cache
+*.ji
+*.so
+*.dylib
+
+# System files
+.DS_Store
+Thumbs.db
+
+# VS Code / editors
+.vscode/
+.idea/
+
+# Python (since you sometimes use it)
+__pycache__/
+*.pyc
+
+# Data / outputs (IMPORTANT for your work)
+data/
+output/
+results/
+*.csv
+*.npy
+*.npz
+*.h5
+
+# Plots
+*.png
+*.jpg
+*.pdf
+
+# Large logs
+*.log
