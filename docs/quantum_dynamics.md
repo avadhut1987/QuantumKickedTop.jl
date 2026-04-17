@@ -19,15 +19,15 @@ The quantum kicked top is a **periodically driven system**, and its dynamics are
 The evolution over one driving period is given by
 
 $$
-U = e^{-i\frac{k}{2j}J_z^2} e^{-ipJ_y}
+U = e^{-i\frac{k'}{2j}J_x^2} e^{-i\frac{k}{2j}J_z^2} e^{-ipJ_y}
 $$
 
 where
 
-- \(J_x, J_y, J_z\) are angular momentum operators  
-- \(k\) is the nonlinear kick strength  
-- \(p\) is the rotation parameter  
-- \(j\) is the spin quantum number  
+- $J_x, J_y, J_z$ are angular momentum operators  
+- $k$ and $k'$ are the nonlinear kicking strengths  
+- $p$ is the rotation parameter  
+- $j$ is the spin quantum number  
 
 The state evolves as
 
@@ -60,9 +60,9 @@ constructs the Floquet operator for given parameters.
 
 ## What it does
 
-- Builds angular momentum operators \(J_x, J_y, J_z\)
+- Builds angular momentum operators $J_x, J_y, J_z$
 - Constructs exponential operators
-- Combines them to form the unitary Floquet operator \(U\)
+- Combines them to form the unitary Floquet operator $U$
 
 ## Output
 
@@ -106,8 +106,8 @@ which represent states localized around a point on the unit sphere.
 
 They provide a direct connection between:
 
-- classical phase space → \((\theta, \phi)\)  
-- quantum state → \( |\theta, \phi\rangle \)
+- classical phase space → $(\theta, \phi)$  
+- quantum state → $ |\theta, \phi\rangle $
 
 ---
 
@@ -137,13 +137,13 @@ $$
 
 The module performs the following steps:
 
-1. Iterates over basis states \(m = -j, \ldots, j\)
+1. Iterates over basis states $m = -j, \ldots, j$
 
 2. Computes coefficients:
 
    - binomial factor  
    - trigonometric weights  
-   - phase factor \(e^{-i m \phi}\)
+   - phase factor $e^{-i m \phi}$
 
 3. Constructs the state vector:
 
@@ -175,10 +175,10 @@ Under chaotic dynamics, these states:
 
 Given:
 
-- initial state \( |\psi_0\rangle \)
-- Floquet operator \( U \)
+- initial state $ |\psi_0\rangle $
+- Floquet operator $U$
 
-the state after \(n\) kicks is
+the state after $n$ kicks is
 
 $$
 |\psi_n\rangle = U^n |\psi_0\rangle
