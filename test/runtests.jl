@@ -12,6 +12,8 @@ end
  @test size(r.entropy)==(2,2); @test r.diagnostics.post_transient_samples==4
  @test r.diagnostics.successful_points==4; @test r.diagnostics.failed_points==0
  @test all(isfinite,r.entropy); @test all(x->-1e-12<=x<=1+1e-12,r.entropy)
+ direct=QuantumKickedTop.EntanglementDynamics.vn_entropy_dynamics(s,U,0.7,-0.8;rdm_dim=1,nsteps=6)
+ @test isapprox(r.entropy[1,1],sum(direct.normalized_entropy[4:7])/4;atol=1e-12)
 end
 @testset "Partition validation" begin
  @test_throws ArgumentError QuantumKickedTop.EntanglementDynamics.maximum_vn_entropy(3,0)
