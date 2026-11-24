@@ -1,6 +1,6 @@
 module HeatmapTimeAveragedEntropy
-using Base.Threads, Statistics
-using ..EntanglementDynamics: vn_entropy_dynamics
+using Base.Threads, Statistics, QuantumOptics
+using ..EntanglementDynamics: vn_entropy_dynamics, validate_floquet_operator
 export time_averaged_vn_entropy_grid
 """Compute normalized entropy averages over kicks transient+1:nsteps.
 Kicks 0:transient are discarded. Failed points remain NaN. Early/late
@@ -12,12 +12,12 @@ function time_averaged_vn_entropy_grid(s,U;rdm_dim::Integer,nsteps::Integer,tran
  !isempty(θs)&&!isempty(ϕs) || throw(ArgumentError("Grid must be non-empty"))
  all(x->x isa Real&&isfinite(x)&&0<=x<=π,θs) || throw(ArgumentError("theta values must lie in [0, π]"))
  all(x->x isa Real&&isfinite(x)&&-π<=x<=π,ϕs) || throw(ArgumentError("phi values must lie in [-π, π]"))
- nθ,nϕ=length(θs),length(ϕs); avg=fill(NaN,nθ,nϕ); delta=fill(NaN,nθ,nϕ); failed=falses(nθ,nϕ)
+ validate_floquet_operator(U,SpinBasis(s))\n nθ,nϕ=length(θs),length(ϕs); avg=fill(NaN,nθ,nϕ); delta=fill(NaN,nθ,nϕ); failed=falses(nθ,nϕ)
  npost=nsteps-transient; split=max(1,fld(npost,2))
  @threads for idx in 1:(nθ*nϕ)
   i=fld(idx-1,nϕ)+1; j=mod(idx-1,nϕ)+1
   try
-   r=vn_entropy_dynamics(s,U,θs[i],ϕs[j];rdm_dim=rdm_dim,nsteps=nsteps)
+   r=vn_entropy_dynamics(s,U,θs[i],ϕs[j];rdm_dim=rdm_dim,nsteps=nsteps,validate_operator=false)
    post=@view r.normalized_entropy[(transient+2):(nsteps+1)]
    length(post)==npost || error("Unexpected post-transient sample count")
    avg[i,j]=mean(post)
