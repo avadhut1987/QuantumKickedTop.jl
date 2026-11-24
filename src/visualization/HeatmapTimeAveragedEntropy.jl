@@ -1,11 +1,13 @@
 module HeatmapTimeAveragedEntropy
 using Base.Threads, Statistics, QuantumOptics
-using ..EntanglementDynamics: vn_entropy_dynamics, validate_floquet_operator
+using ..EntanglementDynamics: vn_entropy_dynamics, validate_floquet_operator, maximum_vn_entropy
 export time_averaged_vn_entropy_grid
 """Compute normalized entropy averages over kicks transient+1:nsteps.
 Kicks 0:transient are discarded. Failed points remain NaN. Early/late
 differences are finite-time stability diagnostics, not convergence proofs."""
 function time_averaged_vn_entropy_grid(s,U;rdm_dim::Integer,nsteps::Integer,transient::Integer,space)
+ s isa Real && isfinite(s) && s > 0 && isapprox(2s,round(2s);atol=1e-12,rtol=0) || throw(ArgumentError("s must be a positive integer or half-integer"))
+ maximum_vn_entropy(Int(round(2s)),rdm_dim)
  nsteps>=2 || throw(ArgumentError("nsteps must be at least 2"))
  0<=transient<nsteps || throw(ArgumentError("transient must satisfy 0 ≤ transient < nsteps"))
  θs,ϕs=space.θs,space.ϕs
