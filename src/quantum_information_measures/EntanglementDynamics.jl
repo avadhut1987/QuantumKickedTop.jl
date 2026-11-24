@@ -1,13 +1,13 @@
 module EntanglementDynamics
 using QuantumOptics, LinearAlgebra
 using ..QuantumUtils: coherentspinstate, compute_rhoQ, compute_von_neumann_entropy
-export vn_entropy_dynamics, maximum_vn_entropy
+export vn_entropy_dynamics, maximum_vn_entropy, validate_floquet_operator
 function maximum_vn_entropy(N::Integer, Q::Integer)
     N >= 2 || throw(ArgumentError("N must be at least 2"))
     1 <= Q < N || throw(ArgumentError("rdm_dim must satisfy 1 ≤ Q < N"))
     log2(min(Q + 1, N - Q + 1))
 end
-function _validate_operator(U, basis; tolerance=1e-10)
+function validate_floquet_operator(U, basis; tolerance=1e-10)
     hasproperty(U, :data) && hasproperty(U, :basis_l) && hasproperty(U, :basis_r) || throw(ArgumentError("U must be a QuantumOptics operator"))
     U.basis_l == basis && U.basis_r == basis || throw(ArgumentError("Floquet operator basis mismatch"))
     D = length(basis)
@@ -23,14 +23,14 @@ Return normalized von Neumann entanglement entropy at kicks 0:nsteps.
 The coherent product state at kick zero is included. Normalization is
 log2(min(Q+1,N-Q+1)) bits for the Q | (N-Q) symmetric partition.
 """
-function vn_entropy_dynamics(s, U, theta0::Real, phi0::Real; rdm_dim::Integer, nsteps::Integer)
+function vn_entropy_dynamics(s, U, theta0::Real, phi0::Real; rdm_dim::Integer, nsteps::Integer, validate_operator::Bool=true)
     s isa Real && isfinite(s) && s >= 0 || throw(ArgumentError("s must be finite and non-negative"))
     isapprox(2s,round(2s);atol=1e-12,rtol=0) || throw(ArgumentError("s must be integer or half-integer"))
     N=Int(round(2s)); Q=Int(rdm_dim); Smax=maximum_vn_entropy(N,Q)
     nsteps >= 0 || throw(ArgumentError("nsteps must be non-negative"))
     isfinite(theta0) && 0 <= theta0 <= π || throw(ArgumentError("theta0 must lie in [0, π]"))
     isfinite(phi0) && -π <= phi0 <= π || throw(ArgumentError("phi0 must lie in [-π, π]"))
-    basis=SpinBasis(s); _validate_operator(U,basis)
+    basis=SpinBasis(s); validate_operator && EntanglementDynamics.validate_floquet_operator(U,basis)
     ψ=coherentspinstate(basis,theta0,phi0)
     entropy=Vector{Float64}(undef,nsteps+1); state_norm=similar(entropy)
     for kick in 0:nsteps
