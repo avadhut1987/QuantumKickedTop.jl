@@ -282,3 +282,47 @@ GitHub https://github.com/avadhut1987
 
 This project is licensed under the MIT License.  
 See the `LICENSE` file for details.
+
+
+## Evolving-state entanglement dynamics
+
+The package also computes the normalized von Neumann entanglement entropy of an evolving spin-coherent initial state. This is distinct from the existing Floquet-eigenstate entanglement calculations.
+
+For a symmetric $N$-qubit state with a $Q\,|\,(N-Q)$ bipartition, the reduced symmetric Hilbert-space dimensions are $Q+1$ and $N-Q+1$. The normalization is
+
+$$
+s_A(t)=\frac{S_A(t)}{\log_2[\min(Q+1,N-Q+1)]}.
+$$
+
+The time series includes kick $t=0$ through $T$. A coherent spin state is a product state, so $s_A(0)=0$ up to numerical precision.
+
+~~~julia
+using QuantumKickedTop
+
+s = 5.0
+kr, ktheta, p = 1.0, 0.0, pi/2
+U = QuantumKickedTop.FloquetSystem.floquet(s, p, kr + ktheta, kr - ktheta)
+
+series = QuantumKickedTop.EntanglementDynamics.vn_entropy_dynamics(
+    s, U, 0.75, -1.0; rdm_dim=2, nsteps=1000
+)
+~~~
+
+## Transient-discarded entanglement heatmap
+
+The coherent-state-grid heatmap discards kicks $0:T_0$ and averages exactly $T_0+1:T$:
+
+$$
+\bar{s}_A(\theta_0,\phi_0)=\frac{1}{T-T_0}
+\sum_{t=T_0+1}^{T}s_A(t).
+$$
+
+~~~julia
+space = (θs=range(0, pi; length=15),
+         ϕs=range(-pi, pi; length=16)[1:end-1])
+heatmap = QuantumKickedTop.HeatmapTimeAveragedEntropy.time_averaged_vn_entropy_grid(
+    s, U; rdm_dim=2, nsteps=1000, transient=100, space=space
+)
+~~~
+
+Failed grid points remain NaN and are reported in diagnostics; they are never interpreted as zero entropy. The early/late block difference is a finite-time stability diagnostic, not proof of asymptotic convergence.
