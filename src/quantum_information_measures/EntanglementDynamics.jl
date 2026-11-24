@@ -30,12 +30,12 @@ function vn_entropy_dynamics(s, U, theta0::Real, phi0::Real; rdm_dim::Integer, n
     nsteps >= 0 || throw(ArgumentError("nsteps must be non-negative"))
     isfinite(theta0) && 0 <= theta0 <= π || throw(ArgumentError("theta0 must lie in [0, π]"))
     isfinite(phi0) && -π <= phi0 <= π || throw(ArgumentError("phi0 must lie in [-π, π]"))
-    basis=SpinBasis(s); validate_operator && EntanglementDynamics.validate_floquet_operator(U,basis)
+    basis=SpinBasis(s); validate_operator && validate_floquet_operator(U,basis)
     ψ=coherentspinstate(basis,theta0,phi0)
     entropy=Vector{Float64}(undef,nsteps+1); state_norm=similar(entropy)
     for kick in 0:nsteps
         nrm=norm(ψ.data); isfinite(nrm) && nrm>0 || error("Invalid state norm at kick $kick")
-        ψ.data ./= nrm; state_norm[kick+1]=norm(ψ.data)
+        state_norm[kick+1]=nrm; ψ.data ./= nrm
         ρA=compute_rhoQ(ψ.data,N,Q); value=compute_von_neumann_entropy(ρA)
         isfinite(value) || error("Non-finite entropy at kick $kick")
         entropy[kick+1]=clamp(value/Smax,0.0,1.0)
