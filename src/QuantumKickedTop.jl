@@ -13,18 +13,20 @@ module QuantumKickedTop
     # Quantum measures
     include("quantum_information_measures/QuantumUtils.jl")
     include("quantum_information_measures/QuantumUtilsDiscord.jl")
+    include("quantum_information_measures/EntanglementDynamics.jl")
     include("eigenstate_entanglement_studies/EigenstateEntanglement.jl")
-    using .QuantumUtils, .QuantumUtilsDiscord, .EigenstateEntanglement
+    using .QuantumUtils, .QuantumUtilsDiscord, .EntanglementDynamics, .EigenstateEntanglement
 
-    #Parameter scans
+    # Parameter scans
     include("parameter_scans/LinearEntropyVsKR.jl")
     using .LinearEntropyVsKR
 
     # Analysis tools
     include("visualization/HeatmapEntropy.jl")
+    include("visualization/HeatmapTimeAveragedEntropy.jl")
     include("visualization/HeatmapDiscord.jl")
     include("visualization/HeatmapLinearEntropy.jl")
     include("visualization/HeatmapLLE.jl")
-    using .HeatmapEntropy, .HeatmapDiscord, .HeatmapLinearEntropy, .HeatmapLLE
+    using .HeatmapEntropy, .HeatmapTimeAveragedEntropy, .HeatmapDiscord, .HeatmapLinearEntropy, .HeatmapLLE
 
 end
